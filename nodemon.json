@@ -1,0 +1,5 @@
+{
+  "env": {
+    "MONGO_URI": "mongodb+srv://rakib:rakib@cluster0.f4fx5.mongodb.net/practice"
+  }
+}
