@@ -7,6 +7,7 @@ const isAuth = require("../middleware/auth");
 
 route.get("/order", isAuth, orderController.getOrder);
 route.post("/order", isAuth, orderController.postOrder);
+route.get("/orderDetails/:orderId", isAuth, orderController.getOrderById);
 route.get("/order/:orderId", isAuth, orderController.getInvoice);
 
 module.exports = route;

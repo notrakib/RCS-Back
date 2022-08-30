@@ -7,9 +7,17 @@ const PDFDocument = require("pdfkit");
 exports.getOrder = (req, res, next) => {
   Order.find({ userId: req.userId })
     .populate("userId")
-    .populate("orderedItems.productId")
     .then((orders) => {
       return res.json({ orders });
+    })
+    .catch((err) => next(err));
+};
+
+exports.getOrderById = (req, res, next) => {
+  Order.findOne({ _id: req.params.orderId })
+    .populate("orderedItems.productId")
+    .then((order) => {
+      return res.json({ order });
     })
     .catch((err) => next(err));
 };

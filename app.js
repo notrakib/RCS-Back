@@ -1,16 +1,15 @@
-const path = require("path");
-const bodyParser = require("body-parser");
-const multer = require("multer");
-const mongoose = require("mongoose");
-const helmet = require("helmet");
-const compression = require("compression");
 const routeUser = require("./routes/user");
 const routeProduct = require("./routes/product");
 const routeCart = require("./routes/cart");
 const routeOrder = require("./routes/order");
 
 const express = require("express");
-const app = express();
+const helmet = require("helmet");
+const compression = require("compression");
+const path = require("path");
+const bodyParser = require("body-parser");
+const multer = require("multer");
+const mongoose = require("mongoose");
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -32,6 +31,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
+const app = express();
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(compression());
 
@@ -40,7 +40,6 @@ app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
 );
 
-app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "images")));
 
 app.use((req, res, next) => {
